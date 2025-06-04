@@ -1,4 +1,4 @@
-# VADER Presentation Project
+# Simple VADER 
 
 This repository contains a simple, from-scratch implementation of the VADER (Valence Aware Dictionary and sEntiment Reasoner) algorithm, along with a demonstration for news sentiment analysis using the Natural Language Toolkit (NLTK).
 

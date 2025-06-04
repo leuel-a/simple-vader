@@ -159,7 +159,7 @@ class SentiText(object):
         return stripped
 
 
-class SentiementIntensityAnalyzer:
+class SentimentIntensityAnalyzer:
     """
     Give a sentiment intensity score to sentences.
     """
@@ -325,30 +325,33 @@ class SentiementIntensityAnalyzer:
 
 
 if __name__ == "__main__":
-    # EXAMPLE SENTENCES TO SEE THE SIMPLE VADER IN ACTION 
-    sia = SentiementIntensityAnalyzer()
+    # EXAMPLE SENTENCES TO SEE THE Simple VADER IN ACTION 
+    sia = SentimentIntensityAnalyzer()
 
     positive = "I absolutely love this new coffee shop; the ambiance is fantastic."
     pos_neg, pos_neu, pos_pos, pos_compound = sia.polarity_scores(positive).values()
 
-    print("------------------------------------------------------------------------------------------------------------------------------------\n")
+    print("------------------------------------------------------------------------------------------------------------------------------------")
     print(positive)
-    print(f"With SIMPLE VADER, the sentiment score for the text came about like --> Negativity: {pos_neg}, Neutrality: {pos_neu}, Positivity: {pos_pos}, Compound Value: {pos_compound}")
+    print()
+    print(f"With Simple VADER, the sentiment score for the text came about like --> Negativity: {pos_neg}, Neutrality: {pos_neu}, Positivity: {pos_pos}, Compound Value: {pos_compound}")
     print("------------------------------------------------------------------------------------------------------------------------------------\n")
 
     negative = "The customer service was terribly slow and unhelpful today."
     neg_neg, neg_neu, neg_pos, neg_compound = sia.polarity_scores(negative).values()
 
-    print("------------------------------------------------------------------------------------------------------------------------------------\n")
+    print("------------------------------------------------------------------------------------------------------------------------------------")
     print(negative)
-    print(f"With SIMPLE VADER, the sentiment score for the text came about like --> Negativity: {neg_neg}, Neutrality: {neg_neu}, Positivity: {neg_pos}, Compound Value: {neg_compound}")
+    print()
+    print(f"With Simple VADER, the sentiment score for the text came about like --> Negativity: {neg_neg}, Neutrality: {neg_neu}, Positivity: {neg_pos}, Compound Value: {neg_compound}")
     print("------------------------------------------------------------------------------------------------------------------------------------\n")
 
     neutral = "The cat sat on the mat."
     neu_neg, neu_neu, neu_pos, neu_compound = sia.polarity_scores(neutral).values()
 
-    print("------------------------------------------------------------------------------------------------------------------------------------\n")
+    print("------------------------------------------------------------------------------------------------------------------------------------")
     print(neutral)
-    print(f"With SIMPLE VADER, the sentiment score for the text came about like --> Negativity: {neu_neg}, Neutrality: {neu_neu}, Positivity: {neu_pos}, Compound Value: {neu_compound}")
+    print()
+    print(f"With Simple VADER, the sentiment score for the text came about like --> Negativity: {neu_neg}, Neutrality: {neu_neu}, Positivity: {neu_pos}, Compound Value: {neu_compound}")
     print("------------------------------------------------------------------------------------------------------------------------------------\n")
 

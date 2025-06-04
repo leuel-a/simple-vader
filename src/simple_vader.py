@@ -14,19 +14,20 @@ Classes:
     SentimentIntensityAnalyzer: Analyzes text to compute sentiment intensity scores,
         including positive, negative, neutral, and compound scores.
 """
-# TODO: add capitalization boosters (currently just checks for cap differential, but doesn't apply C_INCR)
-# TODO: apply booster words properly (e.g., scalar_inc_dec should consider distance, up to 3 words before a sentiment word)
-# TODO: handle negation words (e.g., "not good" should invert valence)
-# TODO: implement contrastive conjunction handling (e.g., shift weight after "but")
-# TODO: implement sentiment shift based on degree modifiers like "least" before a word
-# TODO: consider idioms and special case phrases (e.g., "the bomb", "bad ass", "yeah right")
-# TODO: handle emoticons and emojis (e.g., :) or 😢 contributing to valence)
-# TODO: account for repeated letters as emphasis (e.g., "sooo good")
-# TODO: add punctuation emphasis (already partially implemented with _punctuation_emphasis, but not fully integrated)
-# TODO: handle increment/decrement scope (right now, scalar_inc_dec only checks one word without backtracking or accumulation)
-# TODO: add handling for "never", "without", and other complex negation scopes
-# TODO: implement heuristic tuning (e.g., optimizing weights like C_INCR and punctuation amplification empirically)
-# TODO: optimize performance and structure (e.g., reduce repeated code or unnecessary recomputations)
+
+# (!todo): add capitalization boosters (currently just checks for cap differential, but doesn't apply c_incr)
+# (!todo): apply booster words properly (e.g., scalar_inc_dec should consider distance, up to 3 words before a sentiment word)
+# (!todo): handle negation words (e.g., "not good" should invert valence)
+# (!todo): implement contrastive conjunction handling (e.g., shift weight after "but")
+# (!todo): implement sentiment shift based on degree modifiers like "least" before a word
+# (!todo): consider idioms and special case phrases (e.g., "the bomb", "bad ass", "yeah right")
+# (!todo): handle emoticons and emojis (e.g., :) or 😢 contributing to valence)
+# (!todo): account for repeated letters as emphasis (e.g., "sooo good")
+# (!todo): add punctuation emphasis (already partially implemented with _punctuation_emphasis, but not fully integrated)
+# (!todo): handle increment/decrement scope (right now, scalar_inc_dec only checks one word without backtracking or accumulation)
+# (!todo): add handling for "never", "without", and other complex negation scopes
+# (!todo): implement heuristic tuning (e.g., optimizing weights like c_incr and punctuation amplification empirically)
+# (!todo): optimize performance and structure (e.g., reduce repeated code or unnecessary recomputations)
 
 import os
 import math
@@ -133,6 +134,7 @@ class SentiText(object):
         self.words_and_emoticons = self._words_and_emoticons()
         self.is_cap_diff = allcap_differencial(self.words_and_emoticons)
 
+
     @staticmethod
     def _strip_punc_if_word(token: str) -> str:
         """
@@ -161,7 +163,7 @@ class SentiText(object):
 
 class SentimentIntensityAnalyzer:
     """
-    Give a sentiment intensity score to sentences.
+    Gives a sentiment intensity score to sentences.
     """
 
     def __init__(self, lexicon_file="vader_lexicon.txt"):

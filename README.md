@@ -7,7 +7,6 @@ This repository contains a simple, from-scratch implementation of the VADER (Val
 In this project, you'll find:
 - A basic implementation of the VADER algorithm based on the original paper.
 - A simple demo that leverages NLTK to analyze the sentiment of news articles.
-- Code and documentation prepared for a presentation scheduled for tomorrow.
 
 ## Getting Started
 
@@ -26,7 +25,7 @@ In this project, you'll find:
 2. Change to the project directory:
 
     ```sh
-    cd vader
+    cd simple-vader
     ```
 
 3. (Optional) Set up a virtual environment:

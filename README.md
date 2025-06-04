@@ -18,10 +18,6 @@ In this project, you'll find:
 
 1. Clone the repository:
 
-    ```sh
-    git clone https://github.com/yourusername/vader.git
-    ```
-
 2. Change to the project directory:
 
     ```sh

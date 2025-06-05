@@ -15,20 +15,6 @@ Classes:
         including positive, negative, neutral, and compound scores.
 """
 
-# (!todo): add capitalization boosters (currently just checks for cap differential, but doesn't apply c_incr)
-# (!todo): apply booster words properly (e.g., scalar_inc_dec should consider distance, up to 3 words before a sentiment word)
-# (!todo): handle negation words (e.g., "not good" should invert valence)
-# (!todo): implement contrastive conjunction handling (e.g., shift weight after "but")
-# (!todo): implement sentiment shift based on degree modifiers like "least" before a word
-# (!todo): consider idioms and special case phrases (e.g., "the bomb", "bad ass", "yeah right")
-# (!todo): handle emoticons and emojis (e.g., :) or 😢 contributing to valence)
-# (!todo): account for repeated letters as emphasis (e.g., "sooo good")
-# (!todo): add punctuation emphasis (already partially implemented with _punctuation_emphasis, but not fully integrated)
-# (!todo): handle increment/decrement scope (right now, scalar_inc_dec only checks one word without backtracking or accumulation)
-# (!todo): add handling for "never", "without", and other complex negation scopes
-# (!todo): implement heuristic tuning (e.g., optimizing weights like c_incr and punctuation amplification empirically)
-# (!todo): optimize performance and structure (e.g., reduce repeated code or unnecessary recomputations)
-
 import os
 import math
 import string
@@ -233,6 +219,17 @@ class SentimentIntensityAnalyzer:
                     or (i > 2 and words_and_emoticons[i - 3] == "no" and words_and_emoticons[i - 1].lower() in ["or", "nor"]):
                         valence = self.lexicon[item_lowercase] * N_SCALAR
 
+        # handle boosters up to 3 words before
+        for distance in range(1, 4):
+            if i >= distance:
+                prev_word = words_and_emoticons[i - distance]
+                scalar = scalar_inc_dec(prev_word, valence, sentitext.is_cap_diff)
+                if distance == 2:
+                    scalar *= 0.95
+                elif distance == 3:
+                    scalar *= 0.9
+                valence += scalar
+
         sentiments.append(valence)
         return sentiments
 
@@ -356,4 +353,15 @@ if __name__ == "__main__":
     print()
     print(f"With Simple VADER, the sentiment score for the text came about like --> Negativity: {neu_neg}, Neutrality: {neu_neu}, Positivity: {neu_pos}, Compound Value: {neu_compound}")
     print("------------------------------------------------------------------------------------------------------------------------------------\n")
+
+    print("------------------------------------------------------------------------------------------------------------------------------------\n")
+    sentence = "This is very bad!"
+    sentence_neg, sentence_sentence, sentence_pos, sentence_compound = sia.polarity_scores(sentence).values()
+
+    print("------------------------------------------------------------------------------------------------------------------------------------")
+    print(sentence)
+    print()
+    print(f"With Simple VADER, the sentiment score for the text came about like --> Negativity: {sentence_neg}, Neutrality: {sentence_sentence}, Positivity: {sentence_pos}, Compound Value: {sentence_compound}")
+    print("------------------------------------------------------------------------------------------------------------------------------------\n")
+
 
